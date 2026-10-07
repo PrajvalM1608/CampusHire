@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CampusHire</title>
+<style>
+:root{--bg:#edf5f0;--bg-2:#f7faf8;--ink:#17251f;--mut:#5d7069;--card:#fff;--ac:#176b52;--ac-dark:#0f4d3b;--ac-soft:#dff2ea;--mint:#eaf7f1;--line:#d9e7e0;--ok:#16794c;--bad:#b3261e;--shadow:0 18px 42px rgba(18,44,34,.09);--radius:16px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:15px/1.6 "Segoe UI",Tahoma,sans-serif;background:radial-gradient(circle at top right,rgba(23,107,82,.12),transparent 20%),linear-gradient(180deg,#f5faf7 0%,#eef3f1 100%);color:var(--ink)}
+nav{display:flex;gap:8px;align-items:center;padding:14px max(24px,calc((100% - 1100px)/2));background:linear-gradient(135deg,#0a1c18,#173a30 60%,#1e4d41);flex-wrap:wrap;box-shadow:0 10px 30px rgba(16,29,25,.18);position:sticky;top:0;z-index:20}
+nav b{margin-right:auto;font-size:20px;color:#fff;letter-spacing:.2px;font-weight:800}nav b:before{content:'◆';color:#9dd2b8;margin-right:9px;font-size:13px}
+nav button{background:transparent;border:0;color:#d5dfd9;padding:9px 13px;border-radius:9px;cursor:pointer;font:inherit;transition:.2s ease;white-space:nowrap}
+nav button.on,nav button:hover{background:linear-gradient(135deg,var(--ac),#1d7d66);color:#fff;box-shadow:0 8px 16px rgba(23,107,82,.25)}
+main{max-width:1100px;margin:30px auto;padding:0 20px}
+h2{margin:0 0 18px;font-size:30px;letter-spacing:-.8px;color:#18342d}h3{margin:0 0 10px;color:#18342d}
+.card{background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:18px;box-shadow:var(--shadow);overflow-x:auto;backdrop-filter:blur(8px)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:22px}
+.grid .card{margin:0}.stat{position:relative;overflow:hidden}.stat:before{content:'';position:absolute;inset:auto -20% -55% auto;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(23,107,82,.18),transparent 65%)}.stat b{display:block;font-size:32px;color:var(--ac);line-height:1.1;margin-bottom:7px;position:relative}
+.f{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:9px;font:inherit;background:#fff;color:var(--ink);transition:border-color .2s ease,box-shadow .2s ease,transform .2s ease}
+input:hover,select:hover,textarea:hover{border-color:#b9d1c6}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:none;border-color:var(--ac);box-shadow:0 0 0 4px rgba(23,107,82,.12)}
+label{font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--mut);display:block;margin-bottom:6px}
+button.p{background:linear-gradient(135deg,var(--ac),#1e7d67);color:#fff;border:0;padding:11px 18px;border-radius:9px;cursor:pointer;font:inherit;font-weight:700;box-shadow:0 10px 20px rgba(23,107,82,.18);transition:transform .2s ease,box-shadow .2s ease}
+button.p:hover{transform:translateY(-1px);box-shadow:0 12px 22px rgba(23,107,82,.22)}button.g{background:#fff;border:1px solid var(--line);padding:9px 13px;border-radius:9px;cursor:pointer;font:inherit;transition:.2s ease}
+button.g:hover{background:var(--ac-soft);border-color:#cbe6db}
+table{width:100%;border-collapse:collapse;min-width:620px}th{color:var(--mut);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+td,th{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:hover td{background:#fafdfb}
+.tag{display:inline-block;padding:4px 10px;border-radius:99px;background:var(--mint);color:var(--ac-dark);font-size:12px;font-weight:700;white-space:nowrap;border:1px solid rgba(23,107,82,.08)}
+.tag.ok{background:#e7f5ec;color:var(--ok)}.tag.bad{background:#fceae8;color:var(--bad)}
+.auth{max-width:430px;margin:8vh auto}.auth h1{margin:0 0 6px;font-size:34px;letter-spacing:-1px}.mut{color:var(--mut)}
+a{color:var(--ac);text-decoration:none}a:hover{text-decoration:underline}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:0 0 15px}.eyebrow{color:var(--ac);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}.subtle{font-size:14px;color:var(--mut)}.login-switch{display:flex;gap:6px;margin-bottom:22px;padding:4px;background:var(--bg);border-radius:10px;border:1px solid var(--line)}.login-switch button{flex:1;border:0;background:transparent;padding:9px;border-radius:8px;color:var(--mut);cursor:pointer;font:inherit;transition:.2s ease}.login-switch button.selected{background:var(--ink);color:#fff;font-weight:700;box-shadow:0 8px 18px rgba(23,37,31,.12)}
+.drive-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}.drive{padding:20px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(180deg,#ffffff,#f8fbfa);box-shadow:0 14px 28px rgba(23,38,31,.06);transition:transform .2s ease,box-shadow .2s ease}.drive:hover{transform:translateY(-2px);box-shadow:0 18px 34px rgba(23,38,31,.08)}.drive h3{font-size:18px;margin:0 0 5px}.drive-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.company{color:var(--mut);font-size:13px;margin:0 0 14px}.package{font-size:26px;font-weight:800;color:var(--ac);display:flex;flex-direction:column;align-items:flex-end;line-height:1}.package small{font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--mut);margin-top:4px}.drive-meta{display:grid;grid-template-columns:repeat(2,minmax(120px,1fr));gap:10px;margin:16px 0;padding:13px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.meta-label{display:block;color:var(--mut);font-size:11px;letter-spacing:.4px;text-transform:uppercase;margin-bottom:4px}.drive-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.profile-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(260px,.8fr);gap:18px}.profile-card h3{font-size:17px}.resume-card{background:linear-gradient(180deg,#142b26,#1e3f36);color:#fff;border:0;box-shadow:0 18px 32px rgba(20,43,38,.18)}.resume-card .mut{color:#c1d7d0}.resume-file{display:flex;align-items:center;gap:12px;padding:13px 0;margin-top:10px}.resume-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:10px;background:#2f5b52;color:#d9f0e6;font-weight:800}.interview-hero{background:linear-gradient(135deg,#0d1d1a,#1b3c35 65%,#254c41);color:#eefaf5;border:0;box-shadow:0 18px 34px rgba(13,29,28,.18)}.interview-hero .mut{color:#d7efe7}.interview-title{color:#f4fff9;font-size:32px;letter-spacing:-.7px;margin:0 0 12px}.interview-meta{color:#e9f5f0;font-weight:600}.interview-link{color:#9fe2c9;font-weight:700;text-decoration:underline}.interview-link:hover{color:#dffbf2}.interview-note{color:#d7efe7}.question-list{display:grid;gap:12px}.question{padding:16px;border:1px solid var(--line);border-radius:11px;background:linear-gradient(180deg,#fff,#f8faf9);color:#18342d}.question b{color:var(--ac)}.question-number{color:var(--ac);font-weight:800}.restricted{color:#d7efe7;font-style:italic}
+textarea{min-height:120px;resize:vertical}
+@media (max-width:900px){.profile-grid{grid-template-columns:1fr}.nav b{font-size:18px}.main{padding:0 18px}}
+@media (max-width:700px){main{margin:22px auto;padding:0 12px}nav{padding:12px 14px}nav b{width:100%;margin-bottom:4px}.card{padding:16px}.drive-actions{align-items:stretch}.drive-actions > *{width:100%}.drive-meta{grid-template-columns:1fr 1fr}.profile-grid{grid-template-columns:1fr}.drive-list{grid-template-columns:1fr}.section-head{display:block}.h2{font-size:24px}h2{font-size:24px}.auth{margin:7vh auto;padding:0 12px}.auth h1{font-size:28px}.login-switch{margin-bottom:16px}}
+@media (max-width:480px){.drive-meta{grid-template-columns:1fr}.nav{gap:5px}.nav button{padding:8px 10px;font-size:14px}.package{font-size:22px}.grid{grid-template-columns:1fr 1fr}.f{grid-template-columns:1fr}.table-wrap{overflow-x:auto}}
+</style></head><body>
+<div id="app"></div>
+<script>
+let U = JSON.parse(localStorage.u || 'null'), T = localStorage.t, view = '', cur = '', applyDrive = '', interviewSession = null, reg = false, loginRole = 'student';
+const $ = s => document.querySelector(s);
+const e = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const fd = d => d ? new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '-';
+const data = f => Object.fromEntries(new FormData(f));
+const F = (n, l, t = 'text', x = '', v = '') => `<div><label>${l}</label><input name="${n}" type="${t}" ${x} value="${e(v)}"></div>`;
+const st = (k, v) => `<div class="card stat"><b>${v}</b>${k}</div>`;
+const tag = s => `<span class="tag ${['Rejected', 'Not eligible', 'Withdrawn'].includes(s) ? 'bad' : ['Selected', 'Applied', 'Eligible'].includes(s) ? 'ok' : ''}">${s}</span>`;
+const STATUS = ['Applied', 'Shortlisted', 'Test', 'Interview', 'Selected', 'Rejected', 'Withdrawn'];
+const TECH_QUESTIONS = ['Explain the difference between an array and a linked list.', 'What is normalization in a relational database?', 'How does a REST API work?', 'What is the time complexity of binary search?', 'Explain inheritance and polymorphism.', 'How would you debug a slow application?', 'What is the difference between let, const, and var?', 'Explain the purpose of indexing in a database.', 'What is a race condition?', 'Describe one project you are proud of.'];
+const BULK_QUESTIONS = [...TECH_QUESTIONS, 'How do you handle production issues in a live application?', 'What are the trade-offs between SQL and NoSQL databases?', 'How would you ensure code quality in a team environment?'];
+const TABS = { student: ['Dashboard', 'Drives', 'Applications', 'Profile'], officer: ['Dashboard', 'Companies', 'Drives', 'Students'],
+  recruiter: ['Dashboard', 'Companies', 'Drives'], admin: ['Dashboard', 'Drives', 'Interviews', 'Users', 'Students'] };
+
+async function api(p, m = 'GET', b) {
+  const o = { method: m, headers: { Authorization: 'Bearer ' + T } };
+  if (b instanceof FormData) o.body = b; else if (b) { o.headers['Content-Type'] = 'application/json'; o.body = JSON.stringify(b); }
+  const r = await fetch('/api' + p, o), d = await r.json().catch(() => ({}));
+  if (r.status === 401 && T) logout();
+  if (!r.ok) throw new Error(d.error || 'Something went wrong');
+  return d;
+}
+const logout = () => { localStorage.clear(); U = T = null; draw(); };
+const confirmLogout = () => { if (confirm('Do you want to log out?')) logout(); };
+async function save(ev, path, method = 'POST') {
+  ev.preventDefault();
+  try { await api(path, method, data(ev.target)); alert('Saved'); show(); } catch (x) { alert(x.message); }
+}
+async function login(ev) {
+  ev.preventDefault();
+  try {
+    const r = await api(reg ? '/register' : '/login', 'POST', { ...data(ev.target), loginRole });
+    T = localStorage.t = r.token; U = r.user; localStorage.u = JSON.stringify(U); view = ''; draw();
+  } catch (x) { alert(x.message); }
+}
+const appsTable = a => `<div class="card"><table><tr><th>Company<th>Role<th>Package<th>Status<th>Interviews</tr>${
+  a.map(x => `<tr><td>${e(x.drive?.company?.name)}<td>${e(x.drive?.role)}<td>₹${x.drive?.package} LPA<td>${tag(x.status)}<td>${
+    x.interviews.map((i, n) => `${e(i.round)}: ${new Date(i.date).toLocaleString('en-IN')} (${e(i.mode)}) <a href="#" onclick="openInterview('${x._id}',${n});return false">Open interview</a>`).join('<br>')}`).join('')
+  || '<tr><td colspan=5>No applications yet. Open Drives to apply.'}</table></div>`;
+
+const V = {
+  async Dashboard() {
+    if (U.role === 'student') {
+      const a = await api('/applications/mine'), c = s => a.filter(x => x.status === s).length;
+      return `<h2>Hello, ${e(U.name)}</h2><div class="grid">${st('Applications', a.length)}${st('Shortlisted', c('Shortlisted'))}${st('Interviews', c('Interview'))}${st('Selected', c('Selected'))}</div><h3>My applications</h3>${appsTable(a)}`;
+    }
+    const s = await api('/stats');
+    return `<h2>Placement overview</h2><div class="grid">${Object.entries(s).map(([k, v]) => st(k, v)).join('')}</div>`;
+  },
+  async Applications() {
+    const a = await api('/applications/mine');
+    return `<h2>My applications</h2>${appsTable(a)}`;
+  },
+  async Interviews() {
+    const a = await api('/interviews');
+    return `<h2>Scheduled interviews</h2><div class="card"><table><tr><th>Student<th>Company<th>Role<th>Round<th>Date and time<th>Mode<th>Interview room</tr>${a.flatMap(x => x.interviews.map((i, n) => `<tr><td>${e(x.student?.user?.name)}<br><span class="mut">${e(x.student?.user?.email)}</span><td>${e(x.drive?.company?.name)}<td>${e(x.drive?.role)}<td>${e(i.round)}<td>${new Date(i.date).toLocaleString('en-IN')}<td>${e(i.mode)}<td><a href="#" onclick="openInterview('${x._id}',${n});return false">Open interview</a></tr>`)).join('') || '<tr><td colspan=7>No interviews scheduled yet.</td></tr>'}</table></div>`;
+  },
+  async Interview() {
+    const a = await api(`/applications/${interviewSession.applicationId}`), i = a.interviews[interviewSession.index];
+    if (!i) throw Error('Interview not found');
+    const isStudent = U.role === 'student';
+    const savedQuestions = Array.isArray(i.questions) && i.questions.length ? i.questions : [];
+    const questions = savedQuestions.length
+      ? savedQuestions
+      : (isStudent ? [...TECH_QUESTIONS].sort(() => Math.random() - .5).slice(0, 5).map(q => ({ question: q, answer: '' })) : BULK_QUESTIONS.slice(0, 6).map(q => ({ question: q, answer: '' })));
+    const linkBlock = i.link
+      ? isStudent
+        ? `<p class="interview-meta">Meeting link: <a class="interview-link" href="${e(i.link)}" target="_blank" rel="noreferrer">${e(i.link)}</a></p>`
+        : '<p class="interview-meta restricted">Meeting link is only visible to students. Staff can review the interview questions in bulk.</p>'
+      : '<p class="interview-meta restricted">No meeting link shared for this round.</p>';
+    const questionTitle = isStudent ? 'Technical questions' : 'Bulk interview questions';
+    const questionNote = isStudent ? 'Prepare your answers before joining the interview.' : 'Admins and recruiters can review or assign this question set in bulk.';
+
+    return `<div class="card interview-hero"><div class="eyebrow">Interview room</div><h2 class="interview-title">${e(a.drive?.role)} · ${e(i.round)}</h2><p class="interview-note">Welcome to your interview, ${e(a.student?.user?.name || U.name)}.</p><p class="interview-meta">${new Date(i.date).toLocaleString('en-IN')} · ${e(i.mode)}</p>${linkBlock}</div><div class="card"><h3>${questionTitle}</h3><p class="subtle">${questionNote}</p><div class="question-list">${questions.map((q, n) => `<div class="question"><span class="question-number">${n + 1}</span> ${e(q.question)}${!isStudent && q.answer ? `<br><br><strong>Answer:</strong> ${e(q.answer)}` : ''}</div>`).join('')}</div></div><button class="g" onclick="show('${U.role === 'admin' ? 'Interviews' : 'Applications'}')">Back</button>`;
+  },
+  async Profile() {
+    const p = await api('/profile'), f = (n, l, t) => F(n, l, t, '', p[n]);
+    return `<div class="section-head"><div><div class="eyebrow">Student workspace</div><h2>My profile</h2><div class="subtle">Keep your academic record and contact details ready for recruiters.</div></div></div><div class="profile-grid"><form class="card profile-card" onsubmit="save(event,'/profile','PUT')"><h3>Personal and academic details</h3><p class="subtle">This information is used to check drive eligibility.</p><div class="f">
+      ${f('regNo', 'Register number')}${f('phone', 'Phone')}${f('dob', 'Date of birth', 'date')}${f('department', 'Department')}
+      ${f('course', 'Course')}${f('batch', 'Batch / year')}${f('cgpa', 'CGPA', 'number')}${f('tenth', '10th %', 'number')}
+      ${f('twelfth', '12th %', 'number')}${f('backlogs', 'Backlogs', 'number')}${F('skills', 'Skills (comma separated)', 'text', '', (p.skills || []).join(', '))}
+      ${f('github', 'GitHub')}${f('linkedin', 'LinkedIn')}</div><br><button class="p">Save profile</button></form>
+      <div class="card resume-card"><div class="eyebrow">Career document</div><h3>Resume</h3><p class="mut">Upload a current PDF so recruiters can review your experience.</p>${p.resume?.name ? `<div class="resume-file"><span class="resume-icon">PDF</span><span>${e(p.resume.name)}</span></div>` : '<p class="mut">No resume uploaded yet.</p>'}<input type="file" accept="application/pdf" onchange="upload(this)"><p class="mut">PDF only · maximum 5 MB</p></div></div>`;
+  },
+  async Drives() {
+    const d = await api('/drives'); let h = '<h2>Placement drives</h2>';
+    if (U.role !== 'student') {
+      const c = await api('/companies');
+      h += `<form class="card" onsubmit="save(event,'/drives')"><h3>New drive</h3><div class="f"><div><label>Company</label><select name="company">${
+        c.map(x => `<option value="${x._id}">${e(x.name)}</option>`).join('')}</select></div>
+        ${F('role', 'Job role')}${F('package', 'Package (LPA)', 'number', 'step=0.1')}${F('location', 'Location')}
+        ${F('deadline', 'Application deadline', 'date')}${F('driveDate', 'Drive date', 'date')}${F('minCgpa', 'Minimum CGPA', 'number', 'step=0.1')}
+        ${F('min10', 'Minimum 10th %', 'number')}${F('min12', 'Minimum 12th %', 'number')}${F('maxBacklogs', 'Max backlogs', 'number')}
+        ${F('departments', 'Departments (e.g. CSE, ISE)')}</div><br><button class="p">Create drive</button></form>`;
+    }
+    const selected = d.find(x => x._id === applyDrive);
+    const applicationForm = selected ? `<form class="card application-form" onsubmit="submitApplication(event)"><div class="eyebrow">Application form</div><h3>Apply for ${e(selected.role)}</h3><p class="subtle">Review the role, complete your details, then submit your application.</p><div class="f">${F('phone', 'Phone number', 'tel', 'required')}<div><label>Email</label><input value="${e(U.email)}" readonly></div></div><div style="margin-top:14px"><label>Why are you a good fit?</label><textarea name="coverLetter" rows="4" required placeholder="Briefly describe your skills and interest in this role."></textarea></div><div class="drive-actions" style="margin-top:16px"><button type="button" class="g" onclick="cancelApply()">Cancel</button><button class="p">Submit application</button></div></form>` : '';
+    return `<div class="section-head"><div><div class="eyebrow">Opportunities</div><h2>Placement drives</h2><div class="subtle">Explore roles that match your academic profile.</div></div></div>${h.replace('<h2>Placement drives</h2>', '')}${applicationForm}<div class="drive-list">${d.map(x => `<article class="drive"><div class="drive-top"><div><h3>${e(x.role)}</h3><p class="company">${e(x.company?.name)}${x.location ? ' · ' + e(x.location) : ''}</p></div><div class="package">₹${x.package}<small class="meta-label">LPA</small></div></div><div class="drive-meta"><div><span class="meta-label">Apply by</span>${fd(x.deadline)}</div><div><span class="meta-label">Minimum CGPA</span>${x.minCgpa > 0 ? 'CGPA ≥ ' + x.minCgpa : 'No minimum'}</div><div><span class="meta-label">Required percentage</span>${x.min10 > 0 || x.min12 > 0 ? '10th ≥ ' + x.min10 + '% · 12th ≥ ' + x.min12 + '%' : 'No minimum'}</div><div><span class="meta-label">Maximum backlogs</span>${x.maxBacklogs}</div></div><div class="drive-actions"><span class="subtle">${e(x.departments.join(', ') || 'All departments')}</span>${U.role === 'student' ? (x.applied ? tag('Applied') : x.eligible ? `<button class="p" onclick="startApply('${x._id}')">Apply now</button>` : tag('Not eligible')) : `<button class="g" onclick="cur='${x._id}';show('Applicants')">View applicants</button>`}</div></article>`).join('') || '<div class="card"><span class="mut">No drives yet.</span></div>'}</div>`;
+  },
+  async Applicants() {
+    const a = await api(`/drives/${cur}/applicants`);
+    return `<h2>Applicants</h2><div class="card"><table><tr><th>Student<th>CGPA<th>Resume<th>Status<th>Interview</tr>${a.map(x => `<tr>
+      <td>${e(x.student.user?.name)}<br><span class="mut">${e(x.student.regNo)} · ${e(x.student.department)}</span><td>${x.student.cgpa}
+      <td>${x.student.resume?.name ? `<a href="/api/students/${x.student._id}/resume?token=${T}">Download</a>` : '-'}
+      <td><select onchange="setStatus('${x._id}',this.value)">${STATUS.map(s => `<option ${s === x.status ? 'selected' : ''}>${s}</option>`).join('')}</select>
+      <td><button class="g" onclick="sched('${x._id}')">Schedule</button><br>${x.interviews.map(i => `<small>${e(i.round)} · ${new Date(i.date).toLocaleString('en-IN')}</small>`).join('<br>')}`).join('')
+      || '<tr><td colspan=5>No applicants yet.'}</table></div><button class="g" onclick="show('Drives')">Back to drives</button>`;
+  },
+  async Companies() {
+    const c = await api('/companies');
+    return `<h2>Companies</h2><form class="card" onsubmit="save(event,'/companies')"><h3>Add company</h3><div class="f">
+      ${F('name', 'Company name')}${F('industry', 'Industry')}${F('location', 'Location')}${F('website', 'Website')}
+      ${F('contactPerson', 'Contact person')}${F('contactEmail', 'Contact email', 'email')}</div><br><button class="p">Add company</button></form>
+      <div class="card"><table><tr><th>Name<th>Industry<th>Location<th>Contact</tr>${c.map(x => `<tr><td>${e(x.name)}<td>${e(x.industry)}<td>${e(x.location)}<td>${e(x.contactPerson)} ${e(x.contactEmail)}`).join('')}</table></div>`;
+  },
+  async Students() {
+    const s = await api('/students');
+    return `<h2>Students</h2><div class="card"><table><tr><th>Name<th>Reg no<th>Dept<th>CGPA<th>Backlogs<th>Resume</tr>${s.map(x => `<tr>
+      <td>${e(x.user?.name)}<br><span class="mut">${e(x.user?.email)}</span><td>${e(x.regNo)}<td>${e(x.department)}<td>${x.cgpa}<td>${x.backlogs}
+      <td>${x.resume?.name ? `<a href="/api/students/${x._id}/resume?token=${T}">Download</a>` : '-'}`).join('')}</table></div>`;
+  },
+  async Users() {
+    const u = await api('/users');
+    return `<h2>Users</h2><form class="card" onsubmit="save(event,'/users')"><h3>Create staff account</h3><div class="f">
+      ${F('name', 'Name')}${F('email', 'Email', 'email')}${F('password', 'Password', 'password')}
+      <div><label>Role</label><select name="role"><option>officer</option><option>recruiter</option><option>admin</option></select></div></div><br><button class="p">Create account</button></form>
+      <div class="card"><table><tr><th>Name<th>Email<th>Role<th>Status<th></tr>${u.map(x => `<tr><td>${e(x.name)}<td>${e(x.email)}<td>${x.role}
+      <td>${tag(x.active ? 'Eligible' : 'Withdrawn').replace('Eligible', 'Active').replace('Withdrawn', 'Inactive')}
+      <td><button class="g" onclick="toggle('${x._id}')">${x.active ? 'Deactivate' : 'Activate'}</button>`).join('')}</table></div>`;
+  }
+};
+const run = async f => { try { await f(); show(); } catch (x) { alert(x.message); } };
+const openInterview = (applicationId, index) => { interviewSession = { applicationId, index }; view = 'Interview'; show(); };
+const startApply = id => { applyDrive = id; view = 'Drives'; show(); };
+const cancelApply = () => { applyDrive = ''; show('Drives'); };
+const submitApplication = async ev => {
+  ev.preventDefault();
+  try { await api(`/drives/${applyDrive}/apply`, 'POST', data(ev.target)); applyDrive = ''; view = 'Applications'; show(); }
+  catch (x) { alert(x.message); }
+};
+const toggle = id => run(() => api(`/users/${id}/toggle`, 'PUT'));
+const setStatus = (id, status) => api(`/applications/${id}`, 'PUT', { status }).catch(x => alert(x.message));
+const sched = id => {
+  const round = prompt('Round name (e.g. Technical Interview)'); if (!round) return;
+  const date = prompt('Date and time (YYYY-MM-DD HH:MM)'); if (!date) return;
+  const mode = prompt('Mode (Online / Offline)', 'Online'), link = prompt('Meeting link or venue', '');
+  const pairs = prompt('Questions and answers (format: Q1|A1;Q2|A2). Leave blank if none.', '');
+  const questions = (pairs || '').split(';').map(x => x.trim()).filter(Boolean).map(item => {
+    const [question, ...answerParts] = item.split('|');
+    return { question: question.trim(), answer: answerParts.join('|').trim() };
+  }).filter(x => x.question);
+  run(() => api(`/applications/${id}`, 'PUT', { interview: { round, date: new Date(date.replace(' ', 'T')), mode, link, questions } }));
+};
+async function upload(inp) {
+  const f = new FormData(); f.append('resume', inp.files[0]);
+  try { await api('/profile/resume', 'POST', f); show(); } catch (x) { alert(x.message); }
+}
+async function show(v) {
+  view = v || view || TABS[U.role][0]; draw(true);
+  try { $('main').innerHTML = await V[view](); } catch (x) { const main = $('main'); if (main) main.innerHTML = `<div class="card">${e(x.message)}</div>`; }
+}
+function draw(keep) {
+  const app = $('#app');
+  if (!U) {
+    app.innerHTML = `<form class="auth card" onsubmit="login(event)"><div class="login-switch"><button type="button" class="${loginRole === 'student' ? 'selected' : ''}" onclick="setLoginRole('student')">Student login</button><button type="button" class="${loginRole === 'admin' ? 'selected' : ''}" onclick="setLoginRole('admin')">Admin login</button></div><h1>${loginRole === 'admin' ? 'Admin portal' : 'CampusHire'}</h1><p class="mut">${loginRole === 'admin' ? 'Sign in to manage students, drives and placement operations.' : 'Placement portal for students.'}</p>
+      ${reg ? F('name', 'Full name') + F('regNo', 'Register number') + F('department', 'Department (e.g. CSE)') : ''}${F('email', 'Email', 'email')}${F('password', 'Password', 'password')}
+      <br><button class="p">${reg ? 'Create student account' : loginRole === 'admin' ? 'Sign in as admin' : 'Log in'}</button>
+      ${loginRole === 'student' ? `<p><a href="#" onclick="reg=!reg;draw();return false">${reg ? 'I already have an account' : 'New student? Register'}</a></p>` : ''}</form>`;
+    return;
+  }
+  app.innerHTML = `<nav><b>CampusHire</b>${TABS[U.role].map(t => `<button class="${t === view ? 'on' : ''}" onclick="show('${t}')">${t}</button>`).join('')}
+    <button onclick="confirmLogout()">Log out (${e(U.name)})</button></nav><main>${keep && $('main') ? $('main').innerHTML : ''}</main>`;
+  if (!keep) show();
+}
+const setLoginRole = role => { loginRole = role; reg = false; draw(); };
+draw();
+</script></body></html>
