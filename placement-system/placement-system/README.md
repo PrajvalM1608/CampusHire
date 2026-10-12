@@ -7,5 +7,4 @@ Node.js + Express + MongoDB (Mongoose) + vanilla JS frontend.
 3. `npm install`
 4. `npm start` → open http://localhost:3000
 
-Demo logins (auto-created, password `password123`): admin@college.edu, officer@college.edu, recruiter@abc.com.
-Students register themselves on the login screen.
+Students register themselves on the login screen. Administrative and recruiter accounts are seeded internally for authorized use only.

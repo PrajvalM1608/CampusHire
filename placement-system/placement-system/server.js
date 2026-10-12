@@ -170,11 +170,15 @@ app.put('/api/users/:id/toggle', auth('admin'), w(async (q, s) => {
 // ---------- Start ----------
 async function seed() {
   if (!(await User.countDocuments())) {
-    const mk = (name, email, role) => bcrypt.hash('password123', 10).then(password => User.create({ name, email, role, password }));
-    await mk('Admin', 'admin@college.edu', 'admin');
-    await mk('Placement Officer', 'officer@college.edu', 'officer');
-    await mk('Recruiter', 'recruiter@abc.com', 'recruiter');
-    console.log('Seeded demo accounts (password: password123): admin@college.edu, officer@college.edu, recruiter@abc.com');
+    const seedStaff = async (name, email, role) => {
+      const passwordHash = await bcrypt.hash(process.env.SEED_STAFF_PASSWORD || 'password123', 10);
+      return User.create({ name, email, role, password: passwordHash });
+    };
+
+    await seedStaff('Admin', 'admin@college.edu', 'admin');
+    await seedStaff('Placement Officer', 'officer@college.edu', 'officer');
+    await seedStaff('Recruiter', 'recruiter@abc.com', 'recruiter');
+    console.log('Seeded internal staff accounts.');
   }
 
   const companyData = [
